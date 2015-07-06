@@ -1,0 +1,41 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h3>New Product</h3>
+			<form action="/products/new" method="post">
+				<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+				<div class="form-group">
+				    <label for="name">Name</label>
+				    <% if @name_error %>
+					    <% @name_error.each do |error| %>
+					    	<h5><%= error %></h5>
+					    <% end %>
+				    <% end %>
+				    <input type="text" name="product[name]" class="form-control" id="name" placeholder="name">
+			    </div>
+			    <div class="form-group">
+				    <label for="description">Description</label>
+				    <% if @description_error %>
+					    <% @description_error.each do |error| %>
+					    	<h5><%= error %></h5>
+					    <% end %>
+				    <% end %>
+				    <input type="text" name="product[description]" class="form-control" id="description" placeholder="description">
+			    </div>
+			    <div class="form-group">
+				    <label for="pricing">Price</label>
+				    <% if @pricing_error %>
+					    <% @pricing_error.each do |error| %>
+					    	<h5><%= error %></h5>
+					    <% end %>
+				    <% end %>
+				    <input type="input" name="product[pricing]" class="form-control" id="pricing" placeholder="pricing">
+			    </div>
+			    <button type="submit" class="btn btn-default">Create</button>
+			    <div class="nav">
+					<a href="/products/" class="btn btn-link">Back</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
