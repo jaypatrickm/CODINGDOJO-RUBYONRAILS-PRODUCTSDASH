@@ -2,11 +2,11 @@
 
 This is a demo of a simple CMS system of products built using RESTful techniques.
 It contains a product dashboard page allowing a user to:
-	- see listing of products
-	- add a new product
-	- show individual product info
-	- edit individual product info
-	- delete individual product info
+	* see listing of products
+	* add a new product
+	* show individual product info
+	* edit individual product info
+	* delete individual product info
 
 * Ruby version 2.2.1p85
 * Rails 4.2.1
