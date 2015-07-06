@@ -1,2 +1,14 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h3>Show Product</h3>
+			<h5>Name:</h5>
+			<p><%= @product.name %></p>
+			<h5>Description:</h5>
+			<p><%= @product.description %></p>
+			<h5>Pricing:</h5>
+			<p><%= @product.pricing %></p>
+			<a href="/products/<%= @product.id %>/edit" class="btn btn-link">Edit</a> | <a href="/products/" class="btn btn-link">Back</a>
+		</div>
+	</div>
+</div>

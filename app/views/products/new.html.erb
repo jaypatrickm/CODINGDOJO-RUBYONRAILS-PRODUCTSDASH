@@ -8,7 +8,7 @@
 				    <label for="name">Name</label>
 				    <% if @name_error %>
 					    <% @name_error.each do |error| %>
-					    	<h5><%= error %></h5>
+					    	<h5 class="text-danger"><%= error %></h5>
 					    <% end %>
 				    <% end %>
 				    <input type="text" name="product[name]" class="form-control" id="name" placeholder="name">
@@ -17,7 +17,7 @@
 				    <label for="description">Description</label>
 				    <% if @description_error %>
 					    <% @description_error.each do |error| %>
-					    	<h5><%= error %></h5>
+					    	<h5 class="text-danger"><%= error %></h5>
 					    <% end %>
 				    <% end %>
 				    <input type="text" name="product[description]" class="form-control" id="description" placeholder="description">
@@ -26,7 +26,7 @@
 				    <label for="pricing">Price</label>
 				    <% if @pricing_error %>
 					    <% @pricing_error.each do |error| %>
-					    	<h5><%= error %></h5>
+					    	<h5 class="text-danger"><%= error %></h5>
 					    <% end %>
 				    <% end %>
 				    <input type="input" name="product[pricing]" class="form-control" id="pricing" placeholder="pricing">

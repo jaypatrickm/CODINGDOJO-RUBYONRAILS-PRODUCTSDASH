@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
   end
 
   def new
@@ -11,26 +12,40 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @product = Product.find(params[:id])
   end
 
   def create
     @product = Product.create( product_params )
-    if @user.valid?
-      redirect_to '/users/'
+    if @product.valid?
+      redirect_to '/products/'
     else
       # @errors = @user.errors.messages
-      @first_name_error = @user.errors.full_messages_for(:first_name) if @user.errors.messages.include?(:first_name)
-      @last_name_error = @user.errors.full_messages_for(:last_name) if @user.errors.messages.include?(:last_name)
-      @email_address_error = @user.errors.full_messages_for(:email_address) if @user.errors.messages.include?(:email_address)
-      @password_error = @user.errors.full_messages_for(:password) if @user.errors.messages.include?(:password)
+      @name_error = @product.errors.full_messages_for(:name) if @product.errors.messages.include?(:name)
+      @description_error = @product.errors.full_messages_for(:description) if @product.errors.messages.include?(:description)
+      @pricing_error = @product.errors.full_messages_for(:pricing) if @product.errors.messages.include?(:pricing)
       render "new"
     end
   end
 
   def update
+    @product = Product.find(params[:id])
+    @product.assign_attributes( product_params )
+    if @product.valid?
+      @product.save
+      redirect_to '/products/' + params[:id]
+    else
+      @name_error = @product.errors.full_messages_for(:name) if @product.errors.messages.include?(:name)
+      @description_error = @product.errors.full_messages_for(:description) if @product.errors.messages.include?(:description)
+      @pricing_error = @product.errors.full_messages_for(:pricing) if @product.errors.messages.include?(:pricing)
+      render "new"
+    end
   end
 
   def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to '/products/'
   end
   private 
     def product_params
