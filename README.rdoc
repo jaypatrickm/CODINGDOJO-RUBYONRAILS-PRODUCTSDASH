@@ -1,28 +1,12 @@
-== README
+== Ruby on Rails - Product Dashboard
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a demo of a simple CMS system of products built using RESTful techniques.
+It contains a product dashboard page allowing a user to:
+	- see listing of products
+	- add a new product
+	- show individual product info
+	- edit individual product info
+	- delete individual product info
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Ruby version 2.2.1p85
+* Rails 4.2.1
