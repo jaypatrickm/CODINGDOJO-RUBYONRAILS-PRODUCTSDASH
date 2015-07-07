@@ -1,18 +1,19 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.select("products.*, categories.name AS catname").joins(:category)
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.select("products.*, categories.name AS catname").joins(:category).find(params[:id])
   end
 
   def new
-
+    @categories = Category.all
   end
 
   def edit
-    @product = Product.find(params[:id])
+    @product = Product.select("products.*, categories.name AS catname").joins(:category).find(params[:id])
+    @categories = Category.all
   end
 
   def create
@@ -24,6 +25,8 @@ class ProductsController < ApplicationController
       @name_error = @product.errors.full_messages_for(:name) if @product.errors.messages.include?(:name)
       @description_error = @product.errors.full_messages_for(:description) if @product.errors.messages.include?(:description)
       @pricing_error = @product.errors.full_messages_for(:pricing) if @product.errors.messages.include?(:pricing)
+      @categories_error = @product.errors.full_messages_for(:category_id) if @product.errors.messages.include?(:category_id)
+      @categories = Category.all
       render "new"
     end
   end
@@ -38,6 +41,7 @@ class ProductsController < ApplicationController
       @name_error = @product.errors.full_messages_for(:name) if @product.errors.messages.include?(:name)
       @description_error = @product.errors.full_messages_for(:description) if @product.errors.messages.include?(:description)
       @pricing_error = @product.errors.full_messages_for(:pricing) if @product.errors.messages.include?(:pricing)
+      @categories_error = @product.errors.full_messages_for(:category_id) if @product.errors.messages.includes?(:category_id)
       render "new"
     end
   end
@@ -49,6 +53,6 @@ class ProductsController < ApplicationController
   end
   private 
     def product_params
-      params.require(:product).permit(:name, :description, :pricing)
+      params.require(:product).permit(:name, :description, :pricing, :category_id)
     end
 end

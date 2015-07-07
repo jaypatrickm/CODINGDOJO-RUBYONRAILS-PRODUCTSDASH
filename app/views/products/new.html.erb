@@ -31,6 +31,22 @@
 				    <% end %>
 				    <input type="input" name="product[pricing]" class="form-control" id="pricing" placeholder="pricing">
 			    </div>
+			    <div class="form-group">
+				    <label for="category">Category</label>
+				    <select class="form-control" name="product[category_id]">
+				    	<option value="">--SELECT--</option>
+				    	<% if @categories %>
+					    	<% @categories.each do |category| %>
+								<option value="<%= category.id %>"><%= category.name %></option>
+							<% end %>
+						<% end %>
+				    </select>
+				    <% if @categories_error %>
+					    <% @categories_error.each do |error| %>
+					    	<h5 class="text-danger"><%= error %></h5>
+					    <% end %>
+				    <% end %>
+			    </div>
 			    <button type="submit" class="btn btn-default">Create</button>
 			    <div class="nav">
 					<a href="/products/" class="btn btn-link">Back</a>
