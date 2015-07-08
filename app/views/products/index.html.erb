@@ -1,7 +1,13 @@
 <div class="container">
 	<div class="row">
-		<div class="cols-sm-12">
+		<div class="col-sm-12">
 			<h3>Listing Products</h3>
+		</div>
+		<div class="col-sm-12">
+			<h5><a href="/comments/" class="btn btn-default btn-sm">All comments</a></h5>
+		</div>
+		<div class="col-sm-12">
+			<div class="table-responsive">
 			<table id="product-listings" class="table table-bordered table-hover table-striped">
 				<thead>
 					<tr>
@@ -17,7 +23,7 @@
 					<tr>
 						<td><%= product.name %></td>
 						<td><%= product.description %></td>
-						<td><%= product.pricing %></td>
+						<td><%= number_to_currency(product.pricing) %></td>
 						<td><%= product.catname %></td>
 						<td>
 							<a href="/products/<%= product.id %>" class="btn btn-link">Show</a> | 
@@ -32,6 +38,7 @@
 					<% end %>
 				</tbody>
 			</table>
+			</div>
 			<a href="/products/new" class="btn btn-link">New Product</a>
 		</div>
 	</div>

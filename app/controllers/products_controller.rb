@@ -5,6 +5,10 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.select("products.*, categories.name AS catname").joins(:category).find(params[:id])
+    puts 'here is '
+    puts params[:id]
+    @commentlist = Comment.where(product_id:"#{params[:id]}")
+    puts @commentlist
   end
 
   def new
@@ -17,17 +21,19 @@ class ProductsController < ApplicationController
   end
 
   def create
+    puts product_params
     @product = Product.create( product_params )
     if @product.valid?
       redirect_to '/products/'
     else
       # @errors = @user.errors.messages
-      @name_error = @product.errors.full_messages_for(:name) if @product.errors.messages.include?(:name)
-      @description_error = @product.errors.full_messages_for(:description) if @product.errors.messages.include?(:description)
-      @pricing_error = @product.errors.full_messages_for(:pricing) if @product.errors.messages.include?(:pricing)
-      @categories_error = @product.errors.full_messages_for(:category_id) if @product.errors.messages.include?(:category_id)
+      puts @product.errors.full_messages
+      flash[:name_error] = @product.errors.full_messages_for(:name) if @product.errors.messages.include?(:name)
+      flash[:description_error] = @product.errors.full_messages_for(:description) if @product.errors.messages.include?(:description)
+      flash[:pricing_error] = @product.errors.full_messages_for(:pricing) if @product.errors.messages.include?(:pricing)
+      flash[:categories_error] = @product.errors.full_messages_for(:category_id) if @product.errors.messages.include?(:category_id)
       @categories = Category.all
-      render "new"
+      redirect_to '/products/new'
     end
   end
 
@@ -36,13 +42,13 @@ class ProductsController < ApplicationController
     @product.assign_attributes( product_params )
     if @product.valid?
       @product.save
-      redirect_to '/products/' + params[:id]
+      redirect_to '/products/'
     else
-      @name_error = @product.errors.full_messages_for(:name) if @product.errors.messages.include?(:name)
-      @description_error = @product.errors.full_messages_for(:description) if @product.errors.messages.include?(:description)
-      @pricing_error = @product.errors.full_messages_for(:pricing) if @product.errors.messages.include?(:pricing)
-      @categories_error = @product.errors.full_messages_for(:category_id) if @product.errors.messages.includes?(:category_id)
-      render "new"
+      flash[:name_error] = @product.errors.full_messages_for(:name) if @product.errors.messages.include?(:name)
+      flash[:description_error] = @product.errors.full_messages_for(:description) if @product.errors.messages.include?(:description)
+      flash[:pricing_error] = @product.errors.full_messages_for(:pricing) if @product.errors.messages.include?(:pricing)
+      flash[:categories_error] = @product.errors.full_messages_for(:category_id) if @product.errors.messages.include?(:category_id)
+      redirect_to '/products/' + params[:id] + '/edit'
     end
   end
 

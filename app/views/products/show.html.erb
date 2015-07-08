@@ -7,10 +7,38 @@
 			<h5>Description:</h5>
 			<p><%= @product.description %></p>
 			<h5>Pricing:</h5>
-			<p><%= @product.pricing %></p>
+			<p><%= number_to_currency(@product.pricing) %></p>
 			<h5>Category:</h5>
 			<p><%= @product.catname %></p>
 			<a href="/products/<%= @product.id %>/edit" class="btn btn-link">Edit</a> | <a href="/products/" class="btn btn-link">Back</a>
+		</div>
+		<div class="cols-sm-12">
+			<div class="comment-container">
+				<form action="/comments/" method="post">
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<div class="form-group">
+						<label for="comment">Add Comment:</label>
+						<% if flash[:content_error] %>
+						    <% flash[:content_error].each do |error| %>
+						    	<h5 class="text-danger"><%= error %></h5>
+						    <% end %>
+					    <% end %>
+						<textarea class="form-control" rows="3" name="comment[content]"></textarea>
+						<input type="hidden" name="comment[product_id]" value="<%= @product.id %>">
+					</div>
+					<input class="btn btn-default" type="submit">
+				</form>
+			</div>
+			
+				<% if @commentlist %>
+				<h4>Comments</h4>
+				<ul>
+				<% @commentlist.each do |content| %>
+					<li><%= content.content %> - <%= content.updated_at %></li>
+					<% end %>
+				</ul>
+				<% end %>
+			
 		</div>
 	</div>
 </div>
